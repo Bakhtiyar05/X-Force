@@ -225,6 +225,21 @@ button.navbar-toggler:focus {
     }
 }
 
+.title_FilterSort {
+    display: flex;
+    justify-content: space-between;
+
+    .sortBox {
+        display: flex;
+        gap: 10px;
+    }
+}
+
+
+.form-select {
+    font-size: 14px !important;
+}
+
 .productCard {
     max-width: 190px;
     box-shadow: 0 0 5px gray;
@@ -354,6 +369,11 @@ button.navbar-toggler:focus {
                     align-items: center;
                     justify-content: center;
                     text-align: center !important;
+
+                    p {
+                        font-size: 14px;
+                        color: #000;
+                    }
 
                     span {
                         margin-right: 10px;

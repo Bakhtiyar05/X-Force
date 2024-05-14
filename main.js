@@ -90,15 +90,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-
-
-
-
-
-
-
-
-
 emailjs.init("qVAtmAEzb12KDD-fU");
 
     document.getElementById('contact-form').addEventListener('submit', function(event) {
@@ -127,8 +118,48 @@ emailjs.init("qVAtmAEzb12KDD-fU");
 
 
 
+// Get the select elements
+const alphabeticalSelect = document.getElementById('alphabeticalSort');
+const priceSelect = document.getElementById('priceSort');
 
-  
+// Get all product cards
+const productCards = document.querySelectorAll('.productCard');
+
+// Function to sort product cards alphabetically
+function sortAlphabetically(order) {
+    const sortedCards = Array.from(productCards).sort((a, b) => {
+        const nameA = a.querySelector('.productName').textContent;
+        const nameB = b.querySelector('.productName').textContent;
+        return order === 'asc' ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+    });
+    // Append sorted cards back to the container
+    const productContainer = document.querySelector('.productCards');
+    productContainer.innerHTML = '';
+    sortedCards.forEach(card => productContainer.appendChild(card));
+}
+
+// Function to sort product cards by price
+function sortByPrice(order) {
+    const sortedCards = Array.from(productCards).sort((a, b) => {
+        const priceA = parseFloat(a.querySelector('.newPrice').textContent);
+        const priceB = parseFloat(b.querySelector('.newPrice').textContent);
+        return order === 'asc' ? priceA - priceB : priceB - priceA;
+    });
+    // Append sorted cards back to the container
+    const productContainer = document.querySelector('.productCards');
+    productContainer.innerHTML = '';
+    sortedCards.forEach(card => productContainer.appendChild(card));
+}
+
+// Event listeners for select elements
+alphabeticalSelect.addEventListener('change', function() {
+    sortAlphabetically(this.value);
+});
+
+priceSelect.addEventListener('change', function() {
+    sortByPrice(this.value);
+});
+
 
 
 
