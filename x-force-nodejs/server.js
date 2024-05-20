@@ -30,9 +30,197 @@ const banners = [
     }
 ];
 
+const products = [
+    {
+        id: 1,
+        img: '../assets/img/Banner1.jpg',
+        productCode: 1,
+        productName: 'Aaaaaa',
+        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
+        watt: 1200,
+        wolt: 220,
+        oldPrice: '',
+        newPrice: 399
+    },
+    {
+        id: 2,
+        img: '../assets/img/Banner2.jpg',
+        productCode: 2,
+        productName: 'Aaaaaa',
+        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
+        watt: 1200,
+        wolt: 220,
+        oldPrice: 499,
+        newPrice: 399
+    },
+    {
+        id: 3,
+        img: '../assets/img/Banner3.jpg',
+        productCode: 3,
+        productName: 'Aaaaaa',
+        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
+        watt: 1200,
+        wolt: 220,
+        oldPrice: 499,
+        newPrice: 399
+    },
+    {
+        id: 4,
+        img: '../assets/img/Banner3.jpg',
+        productCode: 4,
+        productName: 'Aaaaaa',
+        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
+        watt: 1200,
+        wolt: 220,
+        oldPrice: 599,
+        newPrice: 499
+    },
+    {
+        id: 2,
+        img: '../assets/img/Banner2.jpg',
+        productCode: 2,
+        productName: 'Aaaaaa',
+        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
+        watt: 1200,
+        wolt: 220,
+        oldPrice: 499,
+        newPrice: 399
+    },
+    {
+        id: 3,
+        img: '../assets/img/Banner3.jpg',
+        productCode: 3,
+        productName: 'Aaaaaa',
+        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
+        watt: 1200,
+        wolt: 220,
+        oldPrice: 499,
+        newPrice: 399
+    },
+    {
+        id: 4,
+        img: '../assets/img/Banner3.jpg',
+        productCode: 4,
+        productName: 'Aaaaaa',
+        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
+        watt: 1200,
+        wolt: 220,
+        oldPrice: 599,
+        newPrice: 499
+    },
+    {
+        id: 2,
+        img: '../assets/img/Banner2.jpg',
+        productCode: 2,
+        productName: 'Aaaaaa',
+        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
+        watt: 1200,
+        wolt: 220,
+        oldPrice: 499,
+        newPrice: 399
+    },
+    {
+        id: 3,
+        img: '../assets/img/Banner3.jpg',
+        productCode: 3,
+        productName: 'Aaaaaa',
+        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
+        watt: 1200,
+        wolt: 220,
+        oldPrice: 499,
+        newPrice: 399
+    },
+    {
+        id: 4,
+        img: '../assets/img/Banner3.jpg',
+        productCode: 4,
+        productName: 'Aaaaaa',
+        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
+        watt: 1200,
+        wolt: 220,
+        oldPrice: 599,
+        newPrice: 499
+    },
+    {
+        id: 2,
+        img: '../assets/img/Banner2.jpg',
+        productCode: 2,
+        productName: 'Aaaaaa',
+        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
+        watt: 1200,
+        wolt: 220,
+        oldPrice: 499,
+        newPrice: 399
+    },
+    {
+        id: 3,
+        img: '../assets/img/Banner3.jpg',
+        productCode: 3,
+        productName: 'Aaaaaa',
+        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
+        watt: 1200,
+        wolt: 220,
+        oldPrice: 499,
+        newPrice: 399
+    },
+    {
+        id: 4,
+        img: '../assets/img/Banner3.jpg',
+        productCode: 4,
+        productName: 'Aaaaaa',
+        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
+        watt: 1200,
+        wolt: 220,
+        oldPrice: 599,
+        newPrice: 499
+    },
+    {
+        id: 2,
+        img: '../assets/img/Banner2.jpg',
+        productCode: 2,
+        productName: 'Aaaaaa',
+        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
+        watt: 1200,
+        wolt: 220,
+        oldPrice: 499,
+        newPrice: 399
+    },
+    {
+        id: 3,
+        img: '../assets/img/Banner3.jpg',
+        productCode: 3,
+        productName: 'Aaaaaa',
+        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
+        watt: 1200,
+        wolt: 220,
+        oldPrice: 499,
+        newPrice: 399
+    },
+    {
+        id: 4,
+        img: '../assets/img/Banner3.jpg',
+        productCode: 4,
+        productName: 'Aaaaaa',
+        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
+        watt: 1200,
+        wolt: 220,
+        oldPrice: 599,
+        newPrice: 499
+    }
+]
+
+
+/* Banner GET */
 
 app.get('/api/banners', (req, res) => {
     res.json(banners);
+});
+
+
+/* Product GET */
+
+app.get('/api/products', (req,res) => {
+    res.json(products);
 });
 
 

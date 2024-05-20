@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const previousPageBtn = document.getElementById('previousPage');
 
     let currentPage = 1;
-    const cardsPerPage = 6;
+    const cardsPerPage = 1;
 
     function showPage(pageNumber) {
         const startIndex = (pageNumber - 1) * cardsPerPage;
