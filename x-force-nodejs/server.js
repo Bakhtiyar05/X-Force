@@ -1,33 +1,15 @@
 const express = require('express');
-const cors = require('cors'); // CORS modülünü ekleyin
+const cors = require('cors');
+const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 
-app.use(cors()); // CORS izinlerini ekleyin
-
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const banners = [
-    {
-        id: 1,
-        img: '../assets/img/Banner1.jpg',
-        title: 'Elegance Noire 1',
-        text: `Seduce the senses with Elegance Noire, a women's fragrance that embodies elegance and mystery. A symphony of midnight jasmine, deep amber and whispers of musk, this scent lingers like a hidden promise. Unleash your inner magician with Elegance Noire."`,
-        bannerProductCode: '123'
-    },
-    {
-        id: 2,
-        img: '../assets/img/Banner2.jpg',
-        title: 'Exclusive Perfumes 2',
-        text: 'The Hakari River is surrounded by the oak and hornbeam trees, an abundant texture of water. Ingredients: oak, cedar, nutmeg, wet wood, patchouli.',
-        bannerProductCode: '124'
-    },
-    {
-        id: 3,
-        img: '../assets/img/Banner3.jpg',
-        title: 'Exclusive Perfumes 3',
-        text: 'The Hakari River is surrounded by the oak and hornbeam trees, an abundant texture of water. Ingredients: oak, cedar, nutmeg, wet wood, patchouli.',
-        bannerProductCode: '125'
-    }
+    
 ];
 
 const products = [
@@ -63,167 +45,40 @@ const products = [
         wolt: 220,
         oldPrice: 499,
         newPrice: 399
-    },
-    {
-        id: 4,
-        img: '../assets/img/Banner3.jpg',
-        productCode: 4,
-        productName: 'Aaaaaa',
-        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
-        watt: 1200,
-        wolt: 220,
-        oldPrice: 599,
-        newPrice: 499
-    },
-    {
-        id: 2,
-        img: '../assets/img/Banner2.jpg',
-        productCode: 2,
-        productName: 'Aaaaaa',
-        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
-        watt: 1200,
-        wolt: 220,
-        oldPrice: 499,
-        newPrice: 399
-    },
-    {
-        id: 3,
-        img: '../assets/img/Banner3.jpg',
-        productCode: 3,
-        productName: 'Aaaaaa',
-        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
-        watt: 1200,
-        wolt: 220,
-        oldPrice: 499,
-        newPrice: 399
-    },
-    {
-        id: 4,
-        img: '../assets/img/Banner3.jpg',
-        productCode: 4,
-        productName: 'Aaaaaa',
-        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
-        watt: 1200,
-        wolt: 220,
-        oldPrice: 599,
-        newPrice: 499
-    },
-    {
-        id: 2,
-        img: '../assets/img/Banner2.jpg',
-        productCode: 2,
-        productName: 'Aaaaaa',
-        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
-        watt: 1200,
-        wolt: 220,
-        oldPrice: 499,
-        newPrice: 399
-    },
-    {
-        id: 3,
-        img: '../assets/img/Banner3.jpg',
-        productCode: 3,
-        productName: 'Aaaaaa',
-        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
-        watt: 1200,
-        wolt: 220,
-        oldPrice: 499,
-        newPrice: 399
-    },
-    {
-        id: 4,
-        img: '../assets/img/Banner3.jpg',
-        productCode: 4,
-        productName: 'Aaaaaa',
-        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
-        watt: 1200,
-        wolt: 220,
-        oldPrice: 599,
-        newPrice: 499
-    },
-    {
-        id: 2,
-        img: '../assets/img/Banner2.jpg',
-        productCode: 2,
-        productName: 'Aaaaaa',
-        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
-        watt: 1200,
-        wolt: 220,
-        oldPrice: 499,
-        newPrice: 399
-    },
-    {
-        id: 3,
-        img: '../assets/img/Banner3.jpg',
-        productCode: 3,
-        productName: 'Aaaaaa',
-        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
-        watt: 1200,
-        wolt: 220,
-        oldPrice: 499,
-        newPrice: 399
-    },
-    {
-        id: 4,
-        img: '../assets/img/Banner3.jpg',
-        productCode: 4,
-        productName: 'Aaaaaa',
-        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
-        watt: 1200,
-        wolt: 220,
-        oldPrice: 599,
-        newPrice: 499
-    },
-    {
-        id: 2,
-        img: '../assets/img/Banner2.jpg',
-        productCode: 2,
-        productName: 'Aaaaaa',
-        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
-        watt: 1200,
-        wolt: 220,
-        oldPrice: 499,
-        newPrice: 399
-    },
-    {
-        id: 3,
-        img: '../assets/img/Banner3.jpg',
-        productCode: 3,
-        productName: 'Aaaaaa',
-        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
-        watt: 1200,
-        wolt: 220,
-        oldPrice: 499,
-        newPrice: 399
-    },
-    {
-        id: 4,
-        img: '../assets/img/Banner3.jpg',
-        productCode: 4,
-        productName: 'Aaaaaa',
-        productInfo: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur error, incidunt itaque et veniam mollitia.',
-        watt: 1200,
-        wolt: 220,
-        oldPrice: 599,
-        newPrice: 499
     }
-]
-
+];
 
 /* Banner GET */
-
 app.get('/api/banners', (req, res) => {
     res.json(banners);
 });
 
-
 /* Product GET */
-
-app.get('/api/products', (req,res) => {
+app.get('/api/products', (req, res) => {
     res.json(products);
 });
 
 
+
+/* Banner POST */
+app.post('/api/banners', (req, res) => {
+    const { bannerImg, bannerTitle, bannerText, bannerProductCode } = req.body;
+
+    const newBanner = {
+        id: banners.length + 1,
+        bannerImg: bannerImg,
+        bannerTitle: bannerTitle,
+        bannerText: bannerText,
+        bannerProductCode: bannerProductCode
+    };
+
+    banners.push(newBanner);
+    console.log(newBanner);
+
+    res.status(201).json({ message: 'Banner successfully added!', banner: newBanner });
+});
+
+/* Server Listen */
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
