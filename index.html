@@ -274,7 +274,6 @@
         fetchBanners();
 
 
-
         /* Product Fetch */
 
         async function productFetch() {
@@ -295,26 +294,26 @@
                 const productCard = document.createElement('div');
                 productCard.className = 'productCard card';
 
-                const priceHtml = product.oldPrice ?
-                    `<p class="oldPrice">${product.oldPrice} azn</p>
-                    <p class="newPrice">${product.newPrice} azn</p>` :
-                    `<p class="newPrice">${product.newPrice} azn</p>`;
+                const priceHtml = product.productOldPrice ?
+                    `<p class="oldPrice">${product.productOldPrice} azn</p>
+                    <p class="newPrice">${product.productNewPrice} azn</p>` :
+                    `<p class="newPrice">${product.productNewPrice} azn</p>`;
 
                 productCard.innerHTML = `
                     <div class="cardImg card-img-top">
-                        <img src="${product.img}" class="d-block w-100" alt="${product.productName}">
+                        <img src="${product.productImg}" class="d-block w-100" alt="${product.productName}">
                     </div>
                     <div class="card-body">
                         <article class="productCode">
-                            <p>Məhsulun kodu: ${product.productCode}</p>
+                            <p>Məhsulun kodu: ${product.productProdCode}</p>
                         </article>
                         <article class="productInfo">
                             <article class="info">
-                                <h5 class="productName card-title">${product.productName}</h5>
+                                <h5 class="productName card-title">${product.productTitle}</h5>
                                 <p class="card-text">${product.productInfo}</p>
                                 <div class="infoPower">
-                                    <p>Watt: ${product.watt}</p>
-                                    <p>Wolt: ${product.wolt}</p>
+                                    <p>Watt: ${product.productWatt}</p>
+                                    <p>Wolt: ${product.productWolt}</p>
                                 </div>
                             </article>
                             <article class="productPrices">

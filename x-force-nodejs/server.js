@@ -53,7 +53,6 @@ const authenticateJWT = (req, res, next) => {
     }
 };
 
-// Örnek korumalı endpoint
 app.get('/api/protected', authenticateJWT, (req, res) => {
     res.json({ message: 'This is a protected route', user: req.user });
 });
@@ -65,7 +64,7 @@ const banners = [
 ];
 
 const products = [
-    {
+    /* {
         id: 1,
         img: '../assets/img/Banner1.jpg',
         productCode: 1,
@@ -97,7 +96,7 @@ const products = [
         wolt: 220,
         oldPrice: 499,
         newPrice: 399
-    }
+    } */
 ];
 
 /* Banner GET */
@@ -140,11 +139,6 @@ app.delete('/api/banners/:id', (req, res) => {
 });
 
 
-
-
-
-
-
 /* Banner PUT */
 app.put('/api/banners/:id', (req, res) => {
     const bannerId = parseInt(req.params.id);
@@ -168,6 +162,27 @@ app.put('/api/banners/:id', (req, res) => {
 
 
 
+/* Products POST method */
+app.post('/api/products', (req, res) => {
+    const { productImg, productProdCode, productTitle, productInfo, productWatt, productWolt, productOldPrice, productNewPrice } = req.body;
+
+    const newProduct = {
+        id: products.length + 1,
+        productImg: productImg, 
+        productProdCode: productProdCode,
+        productTitle: productTitle,
+        productInfo: productInfo,
+        productWatt: productWatt,
+        productWolt: productWolt,
+        productOldPrice: productOldPrice,
+        productNewPrice: productNewPrice,
+    };
+
+    products.push(newProduct);
+    console.log(newProduct);
+
+    res.status(201).json({ message: 'Product successfully added', product: newProduct });
+});
 
 
 
