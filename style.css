@@ -262,6 +262,7 @@ button.navbar-toggler:focus {
     max-width: 190px;
     box-shadow: 0 0 5px gray;
     border-radius: 10px;
+    width: 190px;
 
     img {
         width: 100%;

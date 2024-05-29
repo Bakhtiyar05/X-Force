@@ -116,7 +116,7 @@ app.post('/api/banners', (req, res) => {
         bannerProductCode: bannerProductCode
     };
 
-    banners.push(newBanner);
+    banners.unshift(newBanner);
     console.log(newBanner);
 
     res.status(201).json({ message: 'Banner successfully added!', banner: newBanner });
@@ -178,14 +178,27 @@ app.post('/api/products', (req, res) => {
         productNewPrice: productNewPrice,
     };
 
-    products.push(newProduct);
+    products.unshift(newProduct);
     console.log(newProduct);
 
     res.status(201).json({ message: 'Product successfully added', product: newProduct });
 });
 
 
+/* Product DELETE */
+app.delete('/api/products/:id', (req, res) => {
+    const productId = parseInt(req.params.id);
+    const index = products.findIndex(product => product.id === productId);
 
+    if (index === -1) {
+        return res.status(404).json({ message: 'Banner not found!' });
+    }
+
+    const deletedProduct = products.splice(index, 1);
+    console.log('Deleted product:', deletedProduct);
+
+    res.status(200).json({ message: 'Product successfully deleted!' });
+});
 
 
 
