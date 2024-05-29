@@ -68,6 +68,30 @@ h6 {
     border-bottom-left-radius: 20px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    box-shadow: 0 !important;
+}
+
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: var(--mainColor1) !important;
+    outline: 0;
+    box-shadow: none !important;
+}
+
+.navBarSearch .btn {
+    background-color: var(--mainColor1);
+    border-color: var(--mainColor1);
+    color: #fff;
+}
+
+.navBarSearch .btn:hover {
+    background-color: var(--mainColor1);
+    border-color: var(--mainColor1);
+}
+
+.navBarSearch .btn:focus {
+    box-shadow: none !important;
 }
 
 .navBarLogo {

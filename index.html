@@ -114,7 +114,7 @@
 
             <div class="title_FilterSort">
                 <h2>Bütün Məhsullar</h2>
-                <div class="sortBox">
+                <!-- <div class="sortBox">
                     <div class="sortByAlphabe">
                         <select class="form-select" aria-label="Default select example" id="alphabeticalSort">
                             <option value="desc">Z - A</option>
@@ -127,7 +127,7 @@
                             <option value="desc">Bahadan - Ucuza</option>
                         </select>
                     </div>
-                </div>
+                </div> -->
             </div>
             
             <hr />
@@ -159,10 +159,10 @@
             <div aria-label="..." class="mx-auto mt-5">
                 <ul id="pagination" class="pagination">
                     <li class="page-item disabled" id="previousPage">
-                        <span class="page-link">Əvvəl</span>
+                        <span class="page-link"><i class="fa-solid fa-chevron-left"></i></span>
                     </li>
                     <li class="page-item">
-                        <span class="page-link" id="nextPage">Növbəti</span>
+                        <span class="page-link" id="nextPage"><i class="fa-solid fa-chevron-right"></i></span>
                     </li>
                 </ul>
             </div>
@@ -333,6 +333,33 @@
         productFetch();
 
 
+        document.addEventListener("DOMContentLoaded", function() {
+            const productCards = document.querySelectorAll('.productCard');
+
+            // Arama formunu seçme
+            const searchForm = document.querySelector('.desktopNavBarSearch');
+            const searchInput = searchForm.querySelector('input');
+
+            // Forma bir olay dinleyici ekleme
+            searchForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Formun varsayılan davranışını engelle
+
+                const searchTerm = searchInput.value.trim().toLowerCase(); // Arama terimini al ve küçük harfe çevir
+
+                // Tüm ürün kartlarını döngüye alarak arama terimini kontrol et
+                productCards.forEach(card => {
+                    const productName = card.querySelector('.productName').textContent.toLowerCase();
+                    const productCode = card.querySelector('.productCode').textContent.toLowerCase();
+
+                    // Arama terimi ürün adında veya ürün kodunda bulunuyorsa kartı göster, değilse gizle
+                    if (productName.includes(searchTerm) || productCode.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
 
         
     </script>
