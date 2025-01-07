@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const sql = require('mssql');
+
 const app = express();
 const port = 3000;
 const jwt = require('jsonwebtoken');
@@ -9,59 +11,6 @@ app.use(cors());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
-
-// JWT için gizli anahtar
-const SECRET_KEY = '/api/login';
-
-// Kullanıcı bilgileri
-const users = [
-    { username: 'admin', password: 'admin' }
-];
-
-// Oturum açma endpoint'i
-app.post('/api/login', (req, res) => {
-    const { username, password } = req.body;
-
-    // Kullanıcı doğrulaması
-    const user = users.find(user => user.username === username && user.password === password);
-    if (user) {
-        // Kullanıcı doğrulandıysa JWT oluştur
-        const token = jwt.sign({ username: user.username }, SECRET_KEY, { expiresIn: '1h' });
-        res.status(200).json({ message: 'Login successful!', token });
-    } else {
-        res.status(401).json({ message: 'Invalid username or password' });
-    }
-});
-
-// JWT doğrulama middleware'i
-const authenticateJWT = (req, res, next) => {
-    const authHeader = req.headers.authorization;
-
-    if (authHeader) {
-        const token = authHeader.split(' ')[1];
-
-        jwt.verify(token, SECRET_KEY, (err, user) => {
-            if (err) {
-                return res.sendStatus(403);
-            }
-
-            req.user = user;
-            next();
-        });
-    } else {
-        res.sendStatus(401);
-    }
-};
-
-app.get('/api/protected', authenticateJWT, (req, res) => {
-    res.json({ message: 'This is a protected route', user: req.user });
-});
-
-
-
-const banners = [
-    
-];
 
 const products = [
     /* {
@@ -99,120 +48,105 @@ const products = [
     } */
 ];
 
-/* Banner GET */
-app.get('/api/banners', (req, res) => {
-    res.json(banners);
-});
 
-/* Banner POST */
-app.post('/api/banners', (req, res) => {
-    const { bannerImg, bannerTitle, bannerText, bannerProductCode } = req.body;
+// JWT Secret Key
+const SECRET_KEY = '/api/login';
 
-    const newBanner = {
-        id: banners.length + 1,
-        bannerImg: bannerImg,
-        bannerTitle: bannerTitle,
-        bannerText: bannerText,
-        bannerProductCode: bannerProductCode
-    };
+// Users
+const users = [{ username: 'admin', password: 'admin' }];
 
-    banners.unshift(newBanner);
-    console.log(newBanner);
+// Database Configuration
+const dbConfig = {
+    user: 'emin',
+    password: 'Baku99339933',
+    server: 'teamproject.database.windows.net',
+    database: 'teamproject',
+    options: {
+        encrypt: true,
+        trustServerCertificate: false,
+    },
+};
 
-    res.status(201).json({ message: 'Banner successfully added!', banner: newBanner });
-});
-
-
-/* Banner DELETE */
-app.delete('/api/banners/:id', (req, res) => {
-    const bannerId = parseInt(req.params.id);
-    const index = banners.findIndex(banner => banner.id === bannerId);
-
-    if (index === -1) {
-        return res.status(404).json({ message: 'Banner not found!' });
+// Connect to the Database
+async function connectToDatabase() {
+    try {
+        const pool = await sql.connect(dbConfig);
+        console.log('Connected to Azure SQL Database!');
+        return pool;
+    } catch (err) {
+        console.error('Database connection failed!', err);
+        throw err;
     }
+}
 
-    const deletedBanner = banners.splice(index, 1);
-    console.log('Deleted banner:', deletedBanner);
-
-    res.status(200).json({ message: 'Banner successfully deleted!' });
-});
-
-
-/* Banner PUT */
-app.put('/api/banners/:id', (req, res) => {
-    const bannerId = parseInt(req.params.id);
-    const index = banners.findIndex(banner => banner.id === bannerId);
-
-    if (index === -1) {
-        return res.status(404).json({ message: 'Banner not found!' });
+// Login API
+app.post('/api/login', (req, res) => {
+    const { username, password } = req.body;
+    const user = users.find(u => u.username === username && u.password === password);
+    if (user) {
+        const token = jwt.sign({ username: user.username }, SECRET_KEY, { expiresIn: '1h' });
+        res.status(200).json({ message: 'Login successful!', token });
+    } else {
+        res.status(401).json({ message: 'Invalid username or password' });
     }
-
-    const { bannerImg, bannerTitle, bannerText, bannerProductCode } = req.body;
-    banners[index] = {
-        ...banners[index],
-        bannerImg: bannerImg,
-        bannerTitle: bannerTitle,
-        bannerText: bannerText,
-        bannerProductCode: bannerProductCode
-    };
-
-    res.status(200).json({ message: 'Banner successfully updated!', banner: banners[index] });
 });
 
-
-
-/* Products POST method */
-app.post('/api/products', (req, res) => {
-    const { productImg, productProdCode, productTitle, productInfo, productWatt, productWolt, productOldPrice, productNewPrice } = req.body;
-
-    const newProduct = {
-        id: products.length + 1,
-        productImg: productImg, 
-        productProdCode: productProdCode,
-        productTitle: productTitle,
-        productInfo: productInfo,
-        productWatt: productWatt,
-        productWolt: productWolt,
-        productOldPrice: productOldPrice,
-        productNewPrice: productNewPrice,
-    };
-
-    products.unshift(newProduct);
-    console.log(newProduct);
-
-    res.status(201).json({ message: 'Product successfully added', product: newProduct });
-});
-
-
-/* Product DELETE */
-app.delete('/api/products/:id', (req, res) => {
-    const productId = parseInt(req.params.id);
-    const index = products.findIndex(product => product.id === productId);
-
-    if (index === -1) {
-        return res.status(404).json({ message: 'Banner not found!' });
+// JWT Authentication Middleware
+const authenticateJWT = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    if (authHeader) {
+        const token = authHeader.split(' ')[1];
+        jwt.verify(token, SECRET_KEY, (err, user) => {
+            if (err) {
+                return res.sendStatus(403);
+            }
+            req.user = user;
+            next();
+        });
+    } else {
+        res.sendStatus(401);
     }
+};
 
-    const deletedProduct = products.splice(index, 1);
-    console.log('Deleted product:', deletedProduct);
-
-    res.status(200).json({ message: 'Product successfully deleted!' });
+// Example Protected Route
+app.get('/api/protected', authenticateJWT, (req, res) => {
+    res.json({ message: 'This is a protected route', user: req.user });
 });
 
-
-
-
-
-
-
-/* Product GET */
-app.get('/api/products', (req, res) => {
-    res.json(products);
+// Fetch Products from Database
+app.get('/api/products', async (req, res) => {
+    try {
+        const pool = await connectToDatabase();
+        const result = await pool.request().query('SELECT * FROM Products');
+        res.json(result.recordset);
+    } catch (err) {
+        console.error('Error fetching products:', err);
+        res.status(500).json({ message: 'Error fetching products' });
+    }
 });
 
-
-
+// Add Product to Database
+app.post('/api/products', async (req, res) => {
+    const { productImg, productProdCode, productTitle, productInfo, productOldPrice, productNewPrice } = req.body;
+    try {
+        const pool = await connectToDatabase();
+        await pool.request()
+            .input('Image', sql.NVarChar, productImg)
+            .input('ProductCode', sql.NVarChar, productProdCode)
+            .input('ProductName', sql.NVarChar, productTitle)
+            .input('Description', sql.NVarChar, productInfo)
+            .input('OldPrice', sql.Decimal(10, 2), productOldPrice)
+            .input('NewPrice', sql.Decimal(10, 2), productNewPrice)
+            .query(`
+                INSERT INTO Products (Image, ProductCode, ProductName, Description, OldPrice, NewPrice) 
+                VALUES (@Image, @ProductCode, @ProductName, @Description, @OldPrice, @NewPrice)
+            `);
+        res.status(201).json({ message: 'Product successfully added' });
+    } catch (err) {
+        console.error('Error adding product:', err);
+        res.status(500).json({ message: 'Error adding product' });
+    }
+});
 
 
 /* Server Listen */

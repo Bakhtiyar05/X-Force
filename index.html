@@ -53,19 +53,19 @@
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Ana səhifə</a>
+                            <a class="nav-link" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#products">Məhsullar</a>
+                            <a class="nav-link" href="#products">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">Haqqımızda</a>
+                            <a class="nav-link" href="about.html">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#contact">Əlaqə</a>
+                            <a class="nav-link" href="#contact">Contact</a>
                         </li>
                         <li class="nav-item nav-item-location d-flex flex-column">
-                            <a class="nav-link" href="#ourLocation"><i class="fa-solid fa-location-dot"></i> Bizim ünvan</a>
+                            <a class="nav-link" href="#ourLocation"><i class="fa-solid fa-location-dot"></i> Address</a>
                         </li>
                     </ul>
                     <form class="desktopNavBarSearch navBarSearch">
@@ -92,7 +92,15 @@
             </form>
             <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner" id="carouselContent">
-                    <!-- Banner data -->
+                    <div class="carousel-item active" data-bs-interval="3000">
+                        <video width="100%" height="auto" autoplay loop>
+                            <source src="./assets/img/5889074-uhd_3840_2160_25fps.mp4">
+                        </video>
+                        <div class="carousel-caption d-md-block">
+                            <h5>Go to shopping now</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aperiam optio temporibus animi debitis consequuntur.</p>
+                        </div>
+                    </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -113,7 +121,7 @@
         <section id="products" class="container-fluid d-flex flex-wrap">
 
             <div class="title_FilterSort">
-                <h2>Bütün Məhsullar</h2>
+                <h2>All Products</h2>
                 <!-- <div class="sortBox">
                     <div class="sortByAlphabe">
                         <select class="form-select" aria-label="Default select example" id="alphabeticalSort">
@@ -182,7 +190,7 @@
                 <div class="contactForm">
                     <form class="formGroup" id="contact-form">
                         <div class="form-row">
-                            <h2>Bizimlə əlaqə</h2>
+                            <h2>Contact Us</h2>
                             <div class="form-group col-md-12">
                                 <input type="text" class="form-control" id="inputName" name="user_name" placeholder="Name">
                             </div>
@@ -227,10 +235,10 @@
                     <h5>Logo</h5>
                 </div>
                 <div class="copyright">
-                    <span><i class="fa-regular fa-copyright"></i></span> Bütün hüquqlar qorunur X-FORCE 2024
+                    <span><i class="fa-regular fa-copyright"></i></span> All rights protected
                 </div>
                 <div class="test">
-                    test
+                    2024
                 </div>
             </div>
         </section>
@@ -297,9 +305,9 @@
                 productCard.className = 'productCard card';
 
                 const priceHtml = product.productOldPrice ?
-                    `<p class="oldPrice">${product.productOldPrice} azn</p>
-                    <p class="newPrice">${product.productNewPrice} azn</p>` :
-                    `<p class="newPrice">${product.productNewPrice} azn</p>`;
+                    `<p class="oldPrice">${product.productOldPrice} zł</p>
+                    <p class="newPrice">${product.productNewPrice} zł</p>` :
+                    `<p class="newPrice">${product.productNewPrice} zł</p>`;
 
                 productCard.innerHTML = `
                     <div class="cardImg card-img-top">
@@ -307,16 +315,13 @@
                     </div>
                     <div class="card-body">
                         <article class="productCode">
-                            <p>Məhsulun kodu: ${product.productProdCode}</p>
+                            <p>Product code: ${product.productProdCode}</p>
                         </article>
                         <article class="productInfo">
                             <article class="info">
                                 <h5 class="productName card-title">${product.productTitle}</h5>
                                 <p class="card-text">${product.productInfo}</p>
-                                <div class="infoPower">
-                                    <p>Watt: ${product.productWatt}</p>
-                                    <p>Wolt: ${product.productWolt}</p>
-                                </div>
+                                <hr />
                             </article>
                             <article class="productPrices">
                                 ${priceHtml}
@@ -329,7 +334,10 @@
             });
         }
 
-
+        /* <div class="infoPower">
+                                    <p>Watt: ${product.productWatt}</p>
+                                    <p>Wolt: ${product.productWolt}</p>
+                                </div> */
         productFetch();
 
 
